@@ -18,6 +18,8 @@ class test_lambda_gs_bot(unittest.TestCase):
         response = run({},{})
         assert response == '200 OK'
 
+
+
     def _send_command_message(self,command):
         payload = {'team_id': 'T7F3AUXGV',
                    'event': {'type': 'message',

@@ -13,11 +13,15 @@ class Deploy:
         self.setup()
 
     def setup(self):
-        self.osbot._lambda.set_s3_bucket(self.tmp_s3_bucket)
-        self.osbot._lambda.set_s3_key   (self.tmp_s3_key)
+        (self.osbot._lambda.set_s3_bucket(self.tmp_s3_bucket)
+                           .set_s3_key   (self.tmp_s3_key)
+                           .set_xrays_on())
 
 
-    def deploy(self):
+
+    def deploy(self, delete_before=False):
+        if delete_before:
+            self.osbot.delete()
         code_folder = Files.path_combine(__file__,'..')
         self.osbot.add_folder(code_folder)
         self.osbot.add_root_folder()

@@ -1,13 +1,9 @@
 import  json
-
 from osbot_aws.apis.Lambda import Lambda
 from osbot_aws.apis.Secrets import Secrets
 from    pbx_gs_python_utils.utils.Dev             import Dev
 import  ssl
 import  urllib
-
-from osbot.api import GS_Bot_Commands
-
 
 def log_debug(message, data = None, category = "API_GS_Bot"):
     payload = {
@@ -78,6 +74,7 @@ class API_GS_Bot:
         return text, attachments
 
     def handle_link_shared(self, slack_event):
+        from osbot.api.GS_Bot_Commands import GS_Bot_Commands       # due to circular references
         method        = GS_Bot_Commands.jira
         if slack_event.get('links'):
             method_params = ['link_shared', json.dumps(slack_event.get('links'))]
@@ -117,8 +114,10 @@ class API_GS_Bot:
     def resolve_command_method(self, command):
         try:
             method_name = command.split(' ')[0].split('\n')[0]
+            from osbot.api.GS_Bot_Commands import GS_Bot_Commands
             return getattr(GS_Bot_Commands,method_name)
-        except AttributeError:
+        except AttributeError as error:
+            Dev.pprint(error)
             return None
 
     def upload_png_file(self, channel_id, text, file):

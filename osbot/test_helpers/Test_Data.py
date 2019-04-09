@@ -1,0 +1,28 @@
+class Test_Data:
+    api_gw_payload_help     = {'token': 'abc',
+                               'team_id': 'T7F3AUXGV',
+                               'api_app_id': 'ADKLUAF3M',
+                               'event': {'client_msg_id': '9a85fa78-24be-4701-8ff0-5b50dd12738f',
+                                         'type': 'message',
+                                         'text': 'help',
+                                         'user': 'U7ESE1XS7',
+                                         'ts': '1554811005.000200',
+                                         'channel': 'DDKUZTK6X',
+                                         'event_ts': '1554811005.000200',
+                                         'channel_type': 'im'},
+                               'type': 'event_callback', 'event_id': 'EvHT1YNVU5',
+                               'event_time': 1554811005,
+                               'authed_users': ['UDK5W7W3T']}
+
+    api_gw_payload_no_team  = {'token': 'abc',
+                               'api_app_id': 'ADKLUAF3M',
+                               'event': {'client_msg_id': '9a85fa78-24be-4701-8ff0-5b50dd12738f',
+                                         'type': 'message',
+                                         'text': 'help',
+                                         'user': 'U7ESE1XS7',
+                                         'ts': '1554811005.000200',
+                                         'event_ts': '1554811005.000200',
+                                         'channel_type': 'im'},
+                               'type': 'event_callback', 'event_id': 'EvHT1YNVU5',
+                               'event_time': 1554811005,
+                               'authed_users': ['UDK5W7W3T']}
