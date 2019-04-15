@@ -17,7 +17,7 @@ class test_Deploy(TestCase):
 
     def test_deploy(self):
         assert self.deploy.deploy().get('status') == 'ok'
-        Dev.pprint(self.deploy.osbot.invoke())
+        #Dev.pprint(self.deploy.osbot.invoke())
 
         #assert self.deploy.osbot.invoke() == '200 OK'
 

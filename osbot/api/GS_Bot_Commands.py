@@ -6,7 +6,7 @@ from pbx_gs_python_utils.utils.Lambdas_Helpers       import slack_message
 
 class GS_Bot_Commands:                                      # move to separate class
 
-    gsbot_version = 'v0.57'
+    gsbot_version = 'v0.59'
 
     @staticmethod
     def hello(slack_event, params=None):
@@ -121,7 +121,9 @@ class GS_Bot_Commands:                                      # move to separate c
     # move to new routing mode
     @staticmethod
     def jira(slack_event, params=[]):
-        Lambda('pbx_gs_python_utils.lambdas.gs.elastic_jira').invoke_async({"params": params , "user": slack_event.get('user') , "channel": slack_event.get('channel'), 'team_id': slack_event.get('team_id') },)
+        Lambda('osbot_jira.lambdas.elastic_jira').invoke_async({"params": params , "user": slack_event.get('user') , "channel": slack_event.get('channel'), 'team_id': slack_event.get('team_id') },)
+
+        #Lambda('pbx_gs_python_utils.lambdas.gs.elastic_jira').invoke_async({"params": params , "user": slack_event.get('user') , "channel": slack_event.get('channel'), 'team_id': slack_event.get('team_id') },)
         return None, None
 
     @staticmethod
