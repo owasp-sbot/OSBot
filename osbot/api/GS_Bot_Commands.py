@@ -78,7 +78,7 @@ class GS_Bot_Commands:                                      # move to separate c
     # move to new routing mode
     @staticmethod
     def gdocs(slack_event, params=None):
-        Lambda('gsbot_gsuite.lambdas.gdocs').invoke_async({'params': params, 'data': slack_event})
+        Lambda('osbot_gsuite.lambdas.gdocs').invoke_async({'params': params, 'data': slack_event})
         return None, None
 
     @staticmethod
@@ -109,7 +109,7 @@ class GS_Bot_Commands:                                      # move to separate c
 
     @staticmethod
     def slides(slack_event, params=None):
-        Lambda('gsbot_gsuite.lambdas.slides').invoke_async({'params': params, 'data': slack_event})
+        Lambda('osbot_gsuite.lambdas.slides').invoke_async({'params': params, 'data': slack_event})
         return (None, None)
 
     # move to new routing mode
