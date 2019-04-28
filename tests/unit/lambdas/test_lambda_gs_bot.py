@@ -16,7 +16,7 @@ class test_lambda_gs_bot(unittest.TestCase):
 
     def test_invoke_directly(self):
         response = run({},{})
-        assert response == '200 OK'
+        assert response == '500 Error'
 
 
 

@@ -103,6 +103,8 @@ class API_GS_Bot:
         channel_id = slack_event.get("channel")  # channel command was sent in
         team_id    = slack_event.get("team_id")
         #log_debug("team id: {0}".format(team_id))
+        if channel_id is None or team_id is None:
+            return { "text": text, "attachments": attachments }
         return self.send_message(channel_id, team_id, text, attachments)
 
     def process_posted_body(self, postdata):                                        # handle the encoding created by API GW, which uses as transformation

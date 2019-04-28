@@ -11,9 +11,14 @@ class test_Lambda_Handler(TestCase):
 
     def setUp(self):
         self.handler = Lambda_Handler()
+        self.result  = None
+
+    def tearDown(self):
+        if self.result is not None:
+            Dev.pprint(self.result)
 
     def test_run(self):
-        self.handler.run(Test_Data.api_gw_payload_help)
+        assert self.handler.run(Test_Data.api_gw_payload_help) == '200 OK'
 
     def test_run__no_team(self):
         Dev.print(self.handler.run(Test_Data.api_gw_payload_no_team))
