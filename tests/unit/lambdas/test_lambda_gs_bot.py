@@ -9,7 +9,7 @@ from osbot.lambdas.osbot import run
 class test_lambda_gs_bot(unittest.TestCase):
 
     def setUp(self):
-        self.step_lambda   = Lambda('gsbot')
+        self.step_lambda   = Lambda('osbot.lambdas.osbot')
 
     #def test_lambda_update(self):
     #    self.step_lambda.update_with_lib()
