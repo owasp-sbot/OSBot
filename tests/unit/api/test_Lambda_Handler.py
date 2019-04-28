@@ -23,6 +23,13 @@ class test_Lambda_Handler(TestCase):
     def test_run__no_team(self):
         Dev.print(self.handler.run(Test_Data.api_gw_payload_no_team))
 
+    def test_run__hello(self):
+        command = 'hello'
+        payload = {'event': {'type': 'message',
+                             'text': command,
+                             'user': 'abc'}}
+        assert self.handler.run(payload).get('text') == 'Hello <@abc>, how can I help you?'
+
 
 
     # tracer tests
