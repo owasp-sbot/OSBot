@@ -108,6 +108,12 @@ class GS_Bot_Commands:                                      # move to separate c
     #     return (None, None)
 
     @staticmethod
+    def jupyter(slack_event, params=[]):
+        Lambda('osbot_jupyter.lambdas.osbot').invoke_async({'params': params, 'data': slack_event}), []
+        return None, None
+
+
+    @staticmethod
     def slides(slack_event, params=None):
         Lambda('osbot_gsuite.lambdas.slides').invoke_async({'params': params, 'data': slack_event})
         return (None, None)
