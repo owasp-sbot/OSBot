@@ -31,10 +31,18 @@ class Test_API_GS_Bot(unittest.TestCase):
         #assert response['ok'] == True
 
     def test_resolve_command_method(self):
-        assert self.api.resolve_command_method('hello').__class__.__name__ == 'function'
-        assert self.api.resolve_command_method('help' ).__class__.__name__ == 'function'
+        assert self.api.resolve_command_method('hello').__class__.__name__   == 'function'
+        assert self.api.resolve_command_method('help' ).__class__.__name__   == 'function'
         assert self.api.resolve_command_method('aaaa')  is None
-        #assert self.api.resolve_command_method('aaaa' ).__name__ == 'help'
+        assert self.api.resolve_command_method('jupyter').__class__.__name__ == 'function'
+        assert self.api.resolve_command_method('jupyter').__name__           == 'jupyter'
+        assert self.api.resolve_command_method('jp'     ).__name__           == 'jupyter'
+        assert self.api.resolve_command_method('g'      ).__name__           == 'graph'
+
+    def test_resolve_command_shortcuts(self):
+        assert self.api.resolve_command_shortcuts('aaa') == 'aaa'
+        assert self.api.resolve_command_shortcuts('jp' ) == 'jupyter'
+        assert self.api.resolve_command_shortcuts('g'  ) == 'graph'
 
     def test_send_message(self):
         channel_id = 'GBMGMK88Z'

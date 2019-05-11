@@ -5,6 +5,9 @@ from    pbx_gs_python_utils.utils.Dev             import Dev
 import  ssl
 import  urllib
 
+from pbx_gs_python_utils.utils.Misc import Misc
+
+
 def log_debug(message, data = None, category = "API_GS_Bot"):
     payload = {
                 "index"    : "gs_bot_logs",
@@ -29,10 +32,11 @@ def log_error(message, data = None, category = "API_GS_Bot"):
 
 class API_GS_Bot:
     def __init__(self, team_id = 'T7F3AUXGV'):
-        self.bot_token = self.resolve_bot_token(team_id)
-        self.slack_url = "https://slack.com/api/chat.postMessage"
-        self.bot_name  = '@gsbot'
-        self.bot_id    = '<@UDK5W7W3T>'
+        self.bot_token        = self.resolve_bot_token(team_id)
+        self.slack_url        = "https://slack.com/api/chat.postMessage"
+        self.bot_name         = '@gsbot'
+        self.bot_id           = '<@UDK5W7W3T>'
+        self.method_shortcuts = { 'jp':'jupyter' , 'g':'graph' }
 
     def resolve_bot_token(self,team_id):
         if team_id == 'T7F3AUXGV':    return Secrets('slack-gs-bot'       ).value()
@@ -116,11 +120,15 @@ class API_GS_Bot:
     def resolve_command_method(self, command):
         try:
             method_name = command.split(' ')[0].split('\n')[0]
+            method_name = self.resolve_command_shortcuts(method_name)
             from osbot.api.GS_Bot_Commands import GS_Bot_Commands
             return getattr(GS_Bot_Commands,method_name)
         except AttributeError as error:
             Dev.pprint(error)
             return None
+
+    def resolve_command_shortcuts(self, method_name):
+        return Misc.get_value(self.method_shortcuts, method_name, method_name)
 
     def upload_png_file(self, channel_id, text, file):
         my_file = {
