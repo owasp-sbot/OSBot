@@ -1,10 +1,19 @@
 
 from unittest import TestCase
 
+from pbx_gs_python_utils.utils.Dev import Dev
+
 from osbot.api.GS_Bot_Commands import GS_Bot_Commands
 
 
 class test_GS_Bot_Commands(TestCase):
+
+    def setUp(self):
+        self.result = None
+
+    def tearDown(self):
+        if self.result is not None:
+            Dev.pprint(self.result)
 
     def test_hello(self):
         assert GS_Bot_Commands.hello({}              ) == ('Hello <@None>, how can I help you?',[])
@@ -43,6 +52,9 @@ class test_GS_Bot_Commands(TestCase):
     def test_dot_mindmap(self):
         slack_event = {}
         assert GS_Bot_Commands.mindmap(slack_event, [ "aaa"]) == (None, None)
+
+    def test_graph(self):
+        self.result = GS_Bot_Commands.graph({},['version'])
 
     def test_gdocs(self):
         assert GS_Bot_Commands.gdocs({}, ["version"]) == (None,None)

@@ -6,7 +6,7 @@ from pbx_gs_python_utils.utils.Lambdas_Helpers       import slack_message
 
 class GS_Bot_Commands:                                      # move to separate class
 
-    gsbot_version = 'v0.61'
+    gsbot_version = 'v0.64'
 
     @staticmethod
     def hello(slack_event, params=None):
@@ -96,8 +96,8 @@ class GS_Bot_Commands:                                      # move to separate c
         return None, None
     
     @staticmethod
-    def graph(slack_event, params=[]):
-        Lambda('lambdas.gsbot.gsbot_graph').invoke_async({'params': params, 'data': slack_event}) , []
+    def graph(slack_event, params=None):
+        Lambda('osbot_jira.lambdas.graph').invoke_async({'params': params, 'data': slack_event}) , []
         return None, None
 
     # move to new routing mode
@@ -108,7 +108,7 @@ class GS_Bot_Commands:                                      # move to separate c
     #     return (None, None)
 
     @staticmethod
-    def jupyter(slack_event, params=[]):
+    def jupyter(slack_event, params=None):
         Lambda('osbot_jupyter.lambdas.osbot').invoke_async({'params': params, 'data': slack_event}), []
         return None, None
 
@@ -120,25 +120,25 @@ class GS_Bot_Commands:                                      # move to separate c
 
     # move to new routing mode
     @staticmethod
-    def sheets(slack_event, params=[]):
+    def sheets(slack_event, params=None):
         Lambda('gs.lambda_sheets').invoke_async({'params': params, 'data': slack_event})
         return (None, None)
 
     # move to new routing mode
     @staticmethod
-    def jira(slack_event, params=[]):
+    def jira(slack_event, params=None):
         Lambda('osbot_jira.lambdas.elastic_jira').invoke_async({"params": params , "user": slack_event.get('user') , "channel": slack_event.get('channel'), 'team_id': slack_event.get('team_id') },)
 
         #Lambda('pbx_gs_python_utils.lambdas.gs.elastic_jira').invoke_async({"params": params , "user": slack_event.get('user') , "channel": slack_event.get('channel'), 'team_id': slack_event.get('team_id') },)
         return None, None
 
     @staticmethod
-    def time(slack_event, params=[]):
+    def time(slack_event, params=None):
         user = slack_event.get('user')
         return 'Hi <@{0}>, the time now is: {1}'.format(user, datetime.now()), []
 
     @staticmethod
-    def version(slack_event, params=[]):
+    def version(slack_event, params=None):
         return 'The current version of GSBot is {0}'.format(GS_Bot_Commands.gsbot_version),[]
 
 
