@@ -6,7 +6,7 @@ from pbx_gs_python_utils.utils.Lambdas_Helpers       import slack_message
 
 class GS_Bot_Commands:                                      # move to separate class
 
-    gsbot_version = 'v0.64'
+    gsbot_version = 'v0.65 (OSBot)'
 
     @staticmethod
     def hello(slack_event, params=None):
@@ -139,7 +139,7 @@ class GS_Bot_Commands:                                      # move to separate c
 
     @staticmethod
     def version(slack_event, params=None):
-        return 'The current version of GSBot is {0}'.format(GS_Bot_Commands.gsbot_version),[]
+        return GS_Bot_Commands.gsbot_version,[]
 
 
     # @staticmethod

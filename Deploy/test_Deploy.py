@@ -1,6 +1,7 @@
 
 from unittest import TestCase
 
+from osbot_aws.helpers.Lambda_Package import Lambda_Package
 from pbx_gs_python_utils.utils.Dev import Dev
 
 from osbot.Deploy import Deploy
@@ -15,15 +16,9 @@ class test_Deploy(TestCase):
         assert self.deploy.osbot._lambda.s3_key    == 'gsbot/gsbot.zip'
         assert self.deploy.osbot._lambda.s3_bucket == 'gs-lambda-tests'
 
-    def test_deploy(self):
-        assert self.deploy.deploy().get('status') == 'ok'
-        #Dev.pprint(self.deploy.osbot.invoke())
+    def test_deploy_osbot(self):
+        #assert self.deploy.deploy().get('status') == 'ok'
+        Lambda_Package('osbot.lambdas.osbot').update_code()
 
-        #assert self.deploy.osbot.invoke() == '200 OK'
-
-        #self.deploy.osbot.use_lambda_file('lambdas/dev/hello_world.py')
-        #files = self.deploy.osbot.get_files()
-        # assert self.deploy.osbot.update().get('status') == 'ok'
-        # Dev.pprint(self.deploy.osbot.invoke())
-
-
+    def test_deploy_slack_callback(self):
+        Lambda_Package('osbot.lambdas.slack_callback').update_code()
