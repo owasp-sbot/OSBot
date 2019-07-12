@@ -6,12 +6,16 @@ from pbx_gs_python_utils.utils.Lambdas_Helpers       import slack_message
 
 class GS_Bot_Commands:                                      # move to separate class
 
-    gsbot_version = 'v0.65 (OSBot)'
+    gsbot_version = 'v0.66 (OSBot)'
 
     @staticmethod
     def hello(slack_event, params=None):
         user = slack_event.get('user')
         return 'Hello <@{0}>, how can I help you?'.format(user), []
+
+    @staticmethod
+    def stop(slack_event, params=None):
+        return "I'm sorry Dave, I'm afraid I can't do that", []
 
     @staticmethod
     def help(slack_event, params=None):

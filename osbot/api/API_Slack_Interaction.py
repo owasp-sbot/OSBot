@@ -107,6 +107,7 @@ class API_Slack_Interaction:
     def process_interactive_action(self,data):
         text        = 'interactive action received'
         attachments = []
+        import requests
         requests.post(data['response_url'],
                       headers={'Content-Type': 'application/json'},
                       data=json.dumps({'text': text, 'attachments': attachments}))
@@ -127,7 +128,7 @@ class API_Slack_Interaction:
     def handle_request(self, event):
         try:
             body     = event.get('body')
-            raw_json = urllib.parse.unquote(body).split('=').pop()  # convert the data back to json (need to pick the 2nd parameter
+            raw_json = urllib.parse.unquote(body).split('payload=').pop()  # convert the data back to json (need to pick the 2nd parameter
             data     = json.loads(raw_json)                         # load into Python object
             log_to_elk('osbot.lambdas.slack_callback_handle_request', data=data, index='slack_interaction', category='API_Slack_Interaction')
             return Lambda('osbot_jira.lambdas.slack_actions').invoke(data)
